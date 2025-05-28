@@ -1,31 +1,23 @@
-# layoffs-sql-eda
-A SQL-based exploratory data analysis (EDA) project on tech company layoffs, using MySQL to uncover trends by industry, company, country, and time.
-# 📊 Layoffs SQL EDA Project
+# Layoffs SQL EDA Project
 
-## 📁 Project Overview
-Exploratory data analysis (EDA) of tech company layoffs using MySQL. This project uncovers trends and insights by company, industry, country, and time through structured SQL queries.
+## Project Overview
+This project presents an exploratory data analysis (EDA) on tech company layoffs using SQL (MySQL). The goal is to identify patterns and trends related to layoffs across different companies, industries, countries, and time periods.
 
-## 🎯 Objectives
-- Analyze total layoffs by company, industry, and country
-- Track layoffs by year and month
-- Identify companies with 100% layoffs
-- Use rolling totals to show trends
-- Rank top companies by layoffs per year using window functions
+## Objectives
+- Identify companies with the highest number of layoffs
+- Analyze layoffs by year and by month
+- Find companies with 100% layoffs
+- Calculate rolling totals to observe trends over time
+- Rank top companies by layoffs per year using SQL window functions
 
-## 🛠️ Tools & Skills Used
-- SQL (MySQL)
-- Aggregation: `SUM()`, `MAX()`, `MIN()`
-- Dates: `YEAR()`, `SUBSTRING()`
-- Window functions: `DENSE_RANK()`, `OVER()`
-- CTEs (Common Table Expressions)
+## Tools and Techniques
+- MySQL
+- Aggregation functions: SUM, MAX, MIN
+- Date functions: YEAR, SUBSTRING
+- Common Table Expressions (CTEs)
+- Window functions: DENSE_RANK, OVER
 
-## 📌 Key Insights
-- Certain companies had the highest layoffs overall
-- Some industries and countries were more affected
-- Layoffs peaked during certain months and years
-- Rolling totals helped visualize layoff surges over time
-
-## 🧪 Sample SQL Snippet
+## Sample SQL Query
 ```sql
 SELECT company, SUM(total_laid_off)
 FROM layoffs_staging2
