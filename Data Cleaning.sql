@@ -1,14 +1,7 @@
 SELECT *
 FROM world_layoff.layoffs;
 
-
-
--- 1. Removing Duplicates
--- 2. standardizing Data 
--- 3. Null/ Blank values 
--- 4. Remove unnecessary column/rows 
-
--- first we are going to create a duplicated data base of Layoffs. 
+-- first we are going to create a duplicated data base of Layoffs ------------------------------------------------------------------------
 
 CREATE TABLE layoffs_staging 
 LIKE layoffs;
@@ -20,7 +13,7 @@ INSERT layoffs_staging
 SELECT *
 FROM layoffs;
 
--- HOW TO REMOVE DUPLICATE --
+-- Removing duplicates --------------------------------------------------------------------------------------------------------------------------------
 
 SELECT *,
 ROW_NUMBER () OVER(
@@ -39,7 +32,7 @@ SELECT*
 FROM Duplicate_cte
 WHERE row_num > 1;
 
--- after doing this you check --
+--  checked if it worked  ---------------------------------------------------------------------------------------------------------------------------
 
 SELECT *
 FROM layoffs_staging
@@ -86,10 +79,9 @@ WHERE row_num > 1;
 SELECT *
 FROM layoffs_staging2;
 
--- Standardizing data is find issues in your data and fixing it --
 
--- we are now looking at the comapny column and we are using trim to remove the white spaces to 
--- make it equal.--
+--  looking at the comapny column and using trim to remove the white spaces to ----------------------------------------------------------------------
+-- make it equal ------------------------------------------------------------------------------------------------------------------------------------
 
 SELECT company, TRIM(company)
 FROM layoffs_staging2;
@@ -109,7 +101,7 @@ UPDATE layoffs_staging2
 SET industry  = 'Crypto'
 WHERE industry LIKE 'Crypto%';
 
--- so if you want to take out a dot at the end of a word there is a trailing method. --
+-- Using the trailing method to take out the dot at the end of a word -----------------------------------------------------------------------------
 
 SELECT *
 FROM layoffs_staging2;
@@ -128,7 +120,7 @@ UPDATE layoffs_staging2
 SET country = TRIM(TRAILING '.' FROM country)
 WHERE country LIKE 'United States%';
 
--- CHANGING THE DATE FORMATE--
+-- Changing the data format ------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -150,7 +142,7 @@ MODIFY COLUMN `date`  DATE;
 SELECT *
 FROM layoffs_staging2;
 
--- Now we are working with null values and blank spaces in data --
+-- Now we are working with null values and blank spaces in data ----------------------------------------------------------------------------
 
 SELECT industry 
 FROM layoffs_staging2;
@@ -185,7 +177,7 @@ WHERE t1.industry IS NULL
   AND t2.industry IS NOT NULL;
   
   
-  -- REMOVE COLUMN AND ROWS THAT WE DO NOT NEED. 
+  -- Removing columns and rows that we do not need -----------------------------------------------------------------------------------------
   
   SELECT * 
   FROM layoffs_staging2
